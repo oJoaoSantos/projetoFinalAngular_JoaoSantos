@@ -1,0 +1,23 @@
+ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+li{
+    padding: 0 2px;
+}
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    font-size: x-large;
+}
+li a:hover{
+    color: darkred;
+}
+.modal-backdrop.show {
+    opacity: 0.5;
+  }
+  

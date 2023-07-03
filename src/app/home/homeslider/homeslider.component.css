@@ -1,0 +1,18 @@
+.carousel-wrapper{
+    /* width: 100vw;
+    height: 100vh; */
+    overflow: hidden;
+    position: relative;
+}
+.caption{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 400%;
+    font-weight: bold;
+    color: white;
+}
+img{
+    width: 100%;
+}

@@ -1,0 +1,6 @@
+<h1>Destaques</h1>
+<ul>
+    <li *ngFor="let product of highligthProducts">
+        <a routerLink="productview" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }" (click)="getId(product.id!)"><img src="./assets/images/{{product.foto_principal}}" alt="{{product.nome}}"></a>
+    </li>
+</ul>
