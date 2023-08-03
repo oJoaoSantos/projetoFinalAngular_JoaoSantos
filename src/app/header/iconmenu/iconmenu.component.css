@@ -8,6 +8,10 @@ ul {
 li{
     padding: 0 2px;
 }
+p {
+    margin: 0;
+    padding: 2px;
+}
 a {
     cursor: pointer;
     text-decoration: none;
@@ -19,5 +23,10 @@ li a:hover{
 }
 .modal-backdrop.show {
     opacity: 0.5;
-  }
-  
+}
+.form-group{
+    margin: 5px;
+} 
+#name {
+    font-size: small;
+} 

@@ -6,13 +6,6 @@
     <h4>{{product.tipo_de_produto +" "+ product.cor}}</h4>
     <h4>{{product.preco + "€"}}</h4>
     <p>{{product.descricao}}</p>
+    <button *ngIf="logged" class="btn btn-danger">Adicionar ao carrinho</button>
 </div>
-<!-- <div>
-    <h2>product.marca</h2>
-    <h3>product.nome</h3>
-    <img src="" alt="product.nome">
-    <img src="" alt="product.nome">
-    <h4>product.tipo_de_produto +""+ product.cor </h4>
-    <h4>product.preco</h4>
-    <p>product.descricao</p>
-</div> -->
+

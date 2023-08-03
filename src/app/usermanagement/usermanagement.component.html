@@ -1,0 +1,29 @@
+<h1>Utilizadores</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">E-Mail</th>
+            <th scope="col">Morada</th>
+            <th scope="col">Código-Postal</th>
+            <th scope="col">País</th>
+            <th scope="col" colspan="2">Permissão de Acesso</th>
+            <th scope="col" colspan="2">Conta Ativa</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td> {{ user.nome }} </td>
+            <td> {{ user.email }} </td>
+            <td> {{ user.morada }} </td>
+            <td> {{ user.cp }} </td>
+            <td> {{ user.pais }} </td>
+            <td *ngIf="user.admin"> Administrador</td>
+            <td *ngIf="!user.admin"> Comum </td>
+            <td><button class="btn btn" (click)="toggleAdmin(user.id!, user.admin)"><fa-icon [icon]="userEdit"></fa-icon></button></td>
+            <td *ngIf="user.ativo"> Sim </td>
+            <td *ngIf="!user.ativo"> Não </td>
+            <td><button class="btn btn" (click)="toggleAtivo(user.id!, user.ativo)"><fa-icon [icon]="userEdit"></fa-icon></button></td>
+        </tr>
+    </tbody>
+</table>

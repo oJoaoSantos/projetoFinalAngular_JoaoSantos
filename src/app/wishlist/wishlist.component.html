@@ -1,0 +1,29 @@
+<h1>Whishlist</h1>
+<ul>
+    <li *ngFor="let product of productsToList">
+        <img src="./assets/images/{{product.foto_principal}}" alt="{{product.nome}}">
+        <div id="text">
+            <h3>{{product.marca}}</h3>
+            <p>{{product.nome}}</p>
+            <h2>{{product.preco}}€</h2>
+        </div>
+        <div>
+            <button type="button" class="btn btn-danger" (click)="removeProduct(product.id!)">Remover</button>
+            <button type="button" class="btn btn-success" (click)="addToCart(product.id!)" (click)="openModal(logoutModal)">Adicionar ao Carrinho</button>
+        </div>
+    </li>
+</ul>
+
+<!-- Modal Cart -->
+<ng-template #logoutModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Carrinho de Compras</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>{{ cartMessage }}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Ok</button>
+    </div>
+</ng-template> 

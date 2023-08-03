@@ -3,5 +3,11 @@ export type User = {
     "nome": string,
     "email": string,
     "senha": string,
-    "admin": boolean
+    "morada"?: string,
+    "cp"?: string,
+    "pais"?: string,
+    "admin": boolean,
+    "ativo": boolean,
+    "shopCar"?: number[],
+    "wishList"?: number[],
 }

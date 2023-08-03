@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-2">
+        <!-- <form [formGroup]="typeForm" (ngSubmit)="typeFiltering()">
+            <label>Tipo</label>
+            <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="typeChoice" type="radio" formControlName="type" value="todos" id="todos">
+                <label class="form-check-label" for="todos">Todos</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input"[(ngModel)]="typeChoice" type="radio" formControlName="type" value="Calças" id="calcas">
+                <label class="form-check-label" for="calcas">Calças</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="typeChoice" type="radio" formControlName="type" value="Camisa" id="camisa">
+                <label class="form-check-label" for="camisa">Camisa</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="typeChoice" type="radio" formControlName="type" value="Casaco" id="casaco">
+                <label class="form-check-label" for="casaco">Casaco</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="typeChoice" type="radio" formControlName="type" value="T-Shirt" id="tshirt">
+                <label class="form-check-label" for="tshirt">T-Shirt</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="typeChoice" type="radio" formControlName="type" value="Sweatshirt" id="sweatshirt">
+                <label class="form-check-label" for="sweatshirt">Sweatshirt</label>
+            </div>
+        </form>
+        <form [formGroup]="colorForm" (ngSubmit)="colorFiltering()">    
+            <label>Cor</label>
+            <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="colorChoice" type="radio" formControlName="color" value="todos" id="todosCor">
+                <label class="form-check-label" for="todosCor">Todos</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="colorChoice" type="radio" formControlName="color" value="Azul" id="azul">
+                <label class="form-check-label" for="azul">Azul</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="colorChoice" type="radio" formControlName="color" value="Cinzento" id="cinzento">
+                <label class="form-check-label" for="cinzento">Cinzento</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="colorChoice" type="radio" formControlName="color" value="Laranja" id="laranja">
+                <label class="form-check-label" for="laranja">Laranja</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" [(ngModel)]="colorChoice" type="radio" formControlName="color" value="Preto" id="preto">
+                <label class="form-check-label" for="preto">Preto</label>
+            </div>
+        </form> -->
+        <form [formGroup]="typeForm">
+            <label>Tipo:</label>
+            <div class="form-check" *ngFor="let option of ['Calças', 'Camisa', 'Casaco', 'T-shirt', 'Sweatshirt', 'Todos']">
+              <input class="form-check-input" [(ngModel)]="typeChoice" type="radio"
+                formControlName="type" [value]="option" [id]="option">
+              <label class="form-check-label" [for]="option">{{ option }}</label>
+            </div>
+          </form>
+        <form [formGroup]="colorForm">
+            <label>Cor: </label>
+            <div class="form-check" *ngFor="let option of ['Azul', 'Cinzento', 'Laranja', 'Preto', 'Todos']">
+              <input class="form-check-input" [(ngModel)]="colorChoice" type="radio"
+                formControlName="color" [value]="option" [id]="option">
+              <label class="form-check-label" [for]="option">{{ option }}</label>
+            </div>
+          </form>  
+    </div>
+
+    <div id="container" class="col">
+        <h1>Homem</h1>
+        <p id="total">Total de Resultados: {{ total }}</p>
+        <ul>
+            <li *ngFor="let product of productsToshow" (mouseover)="changeImage(product)" (mouseout)="restoreImage(product)">
+                <a routerLink="productview" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }" (click)="getIdProduct(product.id!)">
+                    <img src="./assets/images/{{product.foto_principal}}" alt="{{product.nome}}">
+                </a>
+                <fa-icon *ngIf="logged" [icon]="starWishRegular" (click)="addOrRemovoWishList(product.id!)"></fa-icon>
+                <!-- <fa-icon *ngIf="logged&&!whished" [icon]="starWishRegular" (click)="addOrRemovoWishList(product.id!)"></fa-icon> -->
+                <!-- <fa-icon *ngIf="logged&&whished" [icon]="starWhishSolid" (click)="addOrRemovoWishList(product.id!)"></fa-icon> -->
+                <h3>{{ product.marca }} </h3>
+                <h4>{{ product.nome }} </h4>
+                <p> {{ product.preco }} € </p>
+                <button *ngIf="logged" class="btn btn-danger" (click)="addToCart(product.id!)" (click)="openModal(logoutModal)">Adicionar ao carrinho</button>
+            </li>
+        </ul>
+        <button [disabled]="allSeen" class="btn btn-dark" (click)="getMore6()">Ver mais</button> 
+    </div>
+</div>
+
+<!-- Modal Cart -->
+<ng-template #logoutModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Carrinho de Compras</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>{{ cartMessage }}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Ok</button>
+    </div>
+</ng-template> 

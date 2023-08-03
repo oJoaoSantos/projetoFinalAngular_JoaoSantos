@@ -1,0 +1,27 @@
+
+img {
+    width: 75px;
+}
+li {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+}
+li > div {
+    width: 300px;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+button {
+    font-size: medium;
+    margin: 5px;
+}
+p, h3, h2{
+    font-size: large;
+}
+h1 {
+    text-align: center;
+}
