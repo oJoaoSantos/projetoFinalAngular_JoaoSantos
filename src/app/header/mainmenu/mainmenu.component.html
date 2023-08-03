@@ -1,7 +1,50 @@
 <ul>
-    <li><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Homem</a></li><p>|</p>
-    <li><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Mulher</a></li>
+    <div class="d-inline-block" ngbDropdown #myDropHomem="ngbDropdown">
+        <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Casacos</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Camisas</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Calças</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Sweatshirts</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Polos</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Sapatos</a></button>
+            <button ngbDropdownItem><a routerLink="productpage" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Todos</a></button>
+        </div>
+    </div>
+    <li><button class="btn" (click)="$event.stopPropagation(); myDropHomem.open();">Homem</button></li>
+    <div class="d-inline-block" ngbDropdown #myDropMulher="ngbDropdown">
+        <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Vestidos</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Blusões</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Coletes</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Jeans</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Saias</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Calções</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Lingerie</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Sapatos</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Malas</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Todos</a></button>
+        </div>
+    </div>
+    <li><button class="btn" (click)="$event.stopPropagation(); myDropMulher.open();">Mulher</button></li>
     <li><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }"><img src="./assets/images/logo.png" alt="H&MLogo"></a></li>
-    <li><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Criança</a></li><p>|</p>
-    <li><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Acessórios</a></li>
+    <div class="d-inline-block" ngbDropdown #myDropCrianca="ngbDropdown">
+        <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Menina | 6-14 Anos</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Menino | 6-14 Anos</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Bebé Menina | 3 Meses - 5 Anos</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Bebé Menino | 3 Meses - 5 Anos</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Mini | 0-12 Meses</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Todos</a></button>
+        </div>
+    </div>
+    <li><button class="btn" (click)="$event.stopPropagation(); myDropCrianca.open();">Criança</button></li>
+    <div class="d-inline-block" ngbDropdown #myDropAcessorios="ngbDropdown">
+        <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Malas</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Pulseiras</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Anéis</a></button>
+            <button ngbDropdownItem><a routerLink="" routerLinkActive="activa" [routerLinkActiveOptions]="{ exact : true }">Todos</a></button>
+        </div>
+    </div>
+    <li><button class="btn" (click)="$event.stopPropagation(); myDropAcessorios.open();">Acessórios</button></li>
 </ul>

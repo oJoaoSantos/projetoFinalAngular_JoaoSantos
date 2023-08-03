@@ -12,12 +12,12 @@ img {
     width: 7rem;
     padding: 0 5px;
 }
-a {
+a, button {
     text-decoration: none;
     color: black;
     font-size: larger;
 }
-a:hover{
+a:hover, button:hover {
     color: darkred;
 }
 p {

@@ -1,6 +1,7 @@
 import { Component, } from '@angular/core';
 import { ServproductService } from 'src/app/shared/products/servproduct.service';
 import { Product } from 'src/app/shared/products/product.model';
+import { ServlocalstorageService } from '../../sessionstorage/servlocalstorage.service';
 
 @Component({
   selector: 'app-productview',
@@ -12,13 +13,15 @@ export class ProductviewComponent {
   id: number = 1;
   img1Src: string ="";
   img2Src: string ="";
+  logged!:boolean;
 
-  constructor(private servproduct: ServproductService) {
+  constructor(private servproduct: ServproductService, private servstorage: ServlocalstorageService) {
   }
   ngOnInit(){
     this.id=this.servproduct.getProductId()
     this.getOneProduct();
     console.log(this.id);
+    this.logged=this.servstorage.get("logged")==="y";
   };
 
   getOneProduct(){
@@ -29,7 +32,7 @@ export class ProductviewComponent {
         this.img2Src =`./assets/images/${this.product.foto_secundaria}`;
         console.log(this.product);
       },
-      error: erro => alert(erro.message)
+      error: e => window.location.replace("http://localhost:4200/**")
     });
   }
 }

@@ -1,0 +1,113 @@
+<h1>Gestão de Produtos</h1>
+
+<form [formGroup]="insertForm" (ngSubmit)="submitForm()">
+    <p class="form-group">
+        <label class="form-check-label" for="produto">Produto:</label>
+        <input class="form-control" type="text" [class.is-invalid]="insertForm.get('nome')?.invalid&&insertForm.get('nome')?.touched" formControlName="nome" id="produto" [(ngModel)]="newProduct.nome">
+    </p>
+    <p class="form-group">
+        <label class="form-check-label" for="marca">Marca:</label>
+        <input class="form-control"  type="text" [class.is-invalid]="insertForm.get('marca')?.invalid&&insertForm.get('marca')?.touched" formControlName="marca" id="marca" [(ngModel)]="newProduct.marca">
+    </p>
+    <p class="form-group">
+        <label class="form-check-label" for="tipo">Tipo:</label>
+        <select class="form-select form-select-sm mb-3" id="tipo" [class.is-invalid]="insertForm.get('tipo_de_produto')?.invalid&&insertForm.get('tipo_de_produto')?.touched" formControlName="tipo_de_produto" [(ngModel)]="newProduct.tipo_de_produto">
+            <option class="form-control" value="">--Selecionar um tipo de produto-</option>
+            <option class="form-control" *ngFor="let type of types"> {{ type }}</option>
+        </select>
+    </p>
+    <p class="form-group">
+        <label class="form-check-label" for="cor">Cor:</label>
+        <input class="form-control"  type="text" [class.is-invalid]="insertForm.get('cor')?.invalid&&insertForm.get('cor')?.touched" formControlName="cor" id="cor" [(ngModel)]="newProduct.cor">
+    </p>
+    <p class="form-group">
+        <label class="form-check-label" for="preco">Preço:</label>
+        <input class="form-control"  type="number" [class.is-invalid]="insertForm.get('preco')?.invalid&&insertForm.get('preco')?.touched" formControlName="preco" id="preco" [(ngModel)]="newProduct.preco">
+    </p>
+    <p class="form-group">
+        <label class="form-check-label" for="descricao">Descrição:</label>
+        <input class="form-control"  type="text" [class.is-invalid]="insertForm.get('descricao')?.invalid&&insertForm.get('descricao')?.touched" formControlName="descricao" id="descricao" [(ngModel)]="newProduct.descricao">
+    </p>
+    <p class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="destaque" formControlName="destaque" [(ngModel)]="newProduct.destaque">
+        <label class="form-check-label" class="form-check-label" for="destaque">Destaque</label>
+    </p>
+    <p><button class="btn btn-primary" type="submit" [disabled]="insertForm.invalid" (click)="openModal(insertModal)">Inserir Produto</button></p>    
+</form>
+
+<form [formGroup]="searchForm" (ngSubmit)="searchProducts()">
+    <div class="form-group">
+      <label id="pesquisar">Pesquisar:</label>
+      <input type="text" class="form-control" formControlName="search" [(ngModel)]="searchText">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Pesquisar</button>
+      <button type="button" class="btn btn-secondary" (click)="clearSearch()">Limpar Pesquisa</button>
+    </div>
+</form>
+<h1>Lista de Produtos</h1>
+<p> Total de produtos: {{ products.length}}</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Foto</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Produto</th>
+            <th scope="col">Tipo Produto</th>
+            <th scope="col">Cor</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Destaque</th>
+            <th scope="col">Operações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of productsToshow" (mouseover)="changeImage(product)" (mouseout)="restoreImage(product)">
+            <td> <img src="./assets/images/{{product.foto_principal}}" alt="{{ product.nome }}"></td>
+            <td>{{ product.marca }}</td>
+            <td>{{ product.nome }}</td>
+            <td>{{ product.tipo_de_produto }}</td>
+            <td>{{ product.cor }}</td>
+            <td>{{ product.preco }}€</td>
+            <td>{{ product.descricao }}</td>
+            <td *ngIf="product.destaque">&#10004;</td>
+            <td *ngIf="!product.destaque">&#10006;</td>
+            <td><button class="btn btn-danger" type="button" (click)="deleteProduct(product.id!)" (click)="openModal(deleteModal)">X</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Insert Modal -->
+<ng-template #insertModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Inserir Produto</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>Nome: {{ newProduct.nome }}</p>
+        <p>Marca: {{ newProduct.marca }}</p>
+        <p>Tipo: {{ newProduct.tipo_de_produto }}</p>
+        <p>Cor: {{ newProduct.cor }}</p>
+        <p>Preço: {{ newProduct.preco }} €</p>
+        <p>Descrição: {{ newProduct.descricao }}</p>
+        <p *ngIf="newProduct.destaque">Destaque: Sim</p>
+        <p *ngIf="!newProduct.destaque">Destaque: Não</p>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Ok</button>
+    </div>
+</ng-template>
+
+<!-- Delete Modal -->
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Eliminar Produto</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>Produto Eliminado com Sucesso.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Ok</button>
+    </div>
+</ng-template> 

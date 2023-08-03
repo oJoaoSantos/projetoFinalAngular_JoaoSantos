@@ -10,7 +10,6 @@ import { Product } from 'src/app/shared/products/product.model';
 })
 export class HomehighlightsComponent {
   highligthProducts: Product[] = [];
-  // allProducts: Product[] = [];
   id!: number;
 
 
@@ -18,27 +17,17 @@ export class HomehighlightsComponent {
   ngOnInit(){
     this.getHighligthProducts();
   };
-  // setProductId(){
-
-  // }
   getId(id: number){
     this.id=id;
     this.servproduct.setProductId(this.id);
   }
 
   getHighligthProducts(){
-    // this.servproduct.getHighligthProducts().subscribe({
-    //   next: (products) => {this.highligthProducts=products}
-    // })
-    // console.log(this.highligthProducts);
-    // this.servproduct.getAllProducts().subscribe((products) => {(this.allProducts=products)})
-    // console.log(this.allProducts);
     this.servproduct.getHighligthProducts().subscribe({
       next: product => {
         this.highligthProducts=product;
-        // console.log(this.highligthProducts);
       },
-      error: erro => alert(erro.message)
+      error: e => window.location.replace("http://localhost:4200/**")
     });
   }
 }

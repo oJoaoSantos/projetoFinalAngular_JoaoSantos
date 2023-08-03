@@ -43,11 +43,26 @@ export class ServproductService {
         catchError(this.processError)
       );
   }
-
   getOneProduct(id: number) : Observable<Product> {
     return this.http.get<Product>(`${this.urlAPI}/${id}`)
       .pipe(
         catchError(this.processError)
       );
+  }
+  getFilteredProduct(atribute:string, filter: string) : Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.urlAPI}?${atribute}}=${filter}`)
+      .pipe(
+        catchError(this.processError)
+      );
+  }
+  insertProduct(product : Product) : Observable<Product> {
+    return this.http.post<Product>(this.urlAPI,product).pipe(
+      catchError(this.processError)
+    );;
+  }
+  deleteProduct(id : number) : Observable<any> {
+    return this.http.delete<any>(`${this.urlAPI}/${id}`).pipe(
+      catchError(this.processError)
+    );
   }
 }

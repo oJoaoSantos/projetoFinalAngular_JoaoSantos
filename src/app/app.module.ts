@@ -14,7 +14,13 @@ import { HomeComponent } from './home/home/home.component';
 import { ProductviewComponent } from './shared/products/productview/productview.component';
 import { IconmenuComponent } from './header/iconmenu/iconmenu.component';
 import { HeaderComponent } from './header/header/header.component';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductpageComponent } from './productpage/productpage.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { ManagementComponent } from './management/management.component';
+import { CartComponent } from './cart/cart.component';
+import { UsermanagementComponent } from './usermanagement/usermanagement.component';
+import { NotfoundComponent } from './notfound/notfound.component'
 
 @NgModule({
   declarations: [
@@ -27,6 +33,12 @@ import { FormsModule } from '@angular/forms'
     ProductviewComponent,
     IconmenuComponent,
     HeaderComponent,
+    ProductpageComponent,
+    WishlistComponent,
+    ManagementComponent,
+    CartComponent,
+    UsermanagementComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +48,7 @@ import { FormsModule } from '@angular/forms'
     NgbCarouselModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

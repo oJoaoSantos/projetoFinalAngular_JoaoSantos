@@ -1,37 +1,89 @@
-<ul *ngIf="logged">
-    <li><a routerLink=""><fa-icon [icon]="wishlist"></fa-icon></a></li>
-    <li><a routerLink=""><fa-icon [icon]="profile"></fa-icon></a></li>
-    <li><a routerLink=""><fa-icon [icon]="logout"></fa-icon></a></li>
+<ul *ngIf="logged&&permission">
+    <li><p id="name">Bem vindo(a), {{userName}}</p></li>
+    <li><a routerLink="management"><fa-icon [icon]="managment"></fa-icon></a></li>
+    <li><a routerLink="usermanagement"><fa-icon [icon]="profile"></fa-icon></a></li>
+    <li><a routerLink="wishlist"><fa-icon [icon]="wishlist"></fa-icon></a></li>
+
+    <li><a routerLink="cart"><fa-icon [icon]="cart"></fa-icon></a></li>
+    <li><a (click)="openModal(logoutModal)"><fa-icon [icon]="logout"></fa-icon></a></li>
 </ul>
-<ul *ngIf="logged===false">
+<ul *ngIf="logged&&!permission">
+    <li><p>Bem vindo(a), {{userName}}</p></li>
+    <li><a routerLink="wishlist"><fa-icon [icon]="wishlist"></fa-icon></a></li>
+    <li><a routerLink="cart"><fa-icon [icon]="cart"></fa-icon></a></li>
+    <li><a (click)="openModal(logoutModal)"><fa-icon [icon]="logout"></fa-icon></a></li>
+</ul>
+<ul *ngIf="!logged">
     <li><a routerLink=""><fa-icon [icon]="regist"></fa-icon></a></li>
-    <li><a (click)="openModalLogin(content)"><fa-icon [icon]="login"></fa-icon></a></li>
+    <li><a (click)="openModal(logInModal)"><fa-icon [icon]="login"></fa-icon></a></li>
 </ul>
 
 <!-- Login -->
-<ng-template #content let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Login</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-        <!-- <p>Erro</p> -->
-        <form #loginForm="ngForm">
-            <!-- {{ loginForm.value | json }}
-            {{ userModel | json }} -->
-			<div class="form-group">
-				<label for="mail">E-mail:&nbsp;&nbsp;</label>
-                <input type="email" name="email" id="mail" [(ngModel)]="userModel.nome">
+<!-- <ng-template #logInModal let-modal>
+    <form #loginForm="ngForm">	
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Login</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <p>{{errorMessage}}</p>
+            <div *ngIf="email.errors?.['required'] && email.touched">
+                <p>Introduz um E-mail!</p>
+            </div>
+            <div *ngIf="password.errors?.['required'] && password.touched">
+                <p>Introduz uma Senha!</p>
+            </div>
+            <div class="form-group">
+                <label for="mail">E-mail:&nbsp;&nbsp;</label>
+                <input type="email" #email="ngModel" name="email" id="mail" class="Form-control" required [(ngModel)]="userModel.email">
             </div>
             <div class="form-group">
                 <label for="senha">Senha:&nbsp;&nbsp;</label>
-                <input type="password" name="senha" id="senha" [(ngModel)]="userModel.email">
+                <input type="password" #password="ngModel" name="senha" id="senha" class="Form-control" required [(ngModel)]="userModel.senha">
             </div>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Entrar</button>
-	</div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-danger" (click)="onLoginClick()">Entrar</button>
+        </div>
+    </form>
+</ng-template> -->
+
+<!-- Login -->
+<ng-template #logInModal let-modal>
+    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Login</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <p class="form-group">
+                <label class="form-check-label" for="email">Email:</label>
+                <input class="form-control" type="email" [class.is-invalid]="loginForm.get('email')?.invalid&&loginForm.get('email')?.touched" formControlName="email" id="email" [(ngModel)]="newUserLogin.email">
+            </p>
+            <!-- <p *ngIf="loginForm.get('mail')?.errors?.email">Introduz um E-mail válido!</p> -->
+            <p class="form-group">
+            <label class="form-check-label" for="senha">Senha:</label>
+            <input class="form-control"  type="password" [class.is-invalid]="loginForm.get('senha')?.invalid&&loginForm.get('senha')?.touched" formControlName="senha" id="senha" [(ngModel)]="newUserLogin.senha">
+            </p>
+            <p> {{validateMessage}}</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Entrar</button>
+        </div>    
+    </form>
 </ng-template>
 
- 
+
+<!-- Logout -->
+<ng-template #logoutModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Fecho de Sessão</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>Queres Terminar a Sessão?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-danger" (click)="onLogoutClick()">Ok</button>
+    </div>
+</ng-template> 
